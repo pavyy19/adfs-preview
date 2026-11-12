@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="theme.css">
+<script src="data.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Archivo:wght@300;400;500;600&display=optional" rel="stylesheet" />
+<style>
+  @keyframes pmaPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.7); } }
+  @keyframes pmaHdrSpin { to { transform: rotate(360deg); } }
+  @keyframes pmaHdrRipple { from { transform: translate(-50%,-50%) scale(0); opacity: .55; } to { transform: translate(-50%,-50%) scale(1); opacity: 0; } }
+</style>
+</helmet>
+<header style="position:relative;background:rgba(246,244,239,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);borderBottom:1px solid rgba(10,35,71,.10);fontFamily:Archivo, system-ui, sans-serif">
+  <div style="maxWidth:1400px;margin:0 auto;padding:0 clamp(20px,2vw,32px) 0 clamp(20px,4vw,56px);display:flex;alignItems:center;gap:clamp(12px,calc(4vw - 30px),24px);height:clamp(60px,5.6vw,72px)">
+    <a href="index.html" aria-label="AD Financial Services — home" style="display:flex;alignItems:center;gap:13px;textDecoration:none;flexShrink:0">
+      <img src="assets/logo.jpg" alt="ADFS — AD Financial Services" width="1250" height="481" style="height:clamp(40px,3.8vw,50px);width:auto;display:block;flexShrink:0">
+      <span data-brand-name style="display:flex;flexDirection:column;lineHeight:1.05">
+        <span style="fontFamily:Spectral, Georgia, serif;fontSize:clamp(15px,1.5vw,18px);fontWeight:500;color:#0A2347;letterSpacing:.005em;whiteSpace:nowrap">AD Financial Services</span>
+        <span style="fontSize:8.5px;letterSpacing:.30em;textTransform:uppercase;color:#B01E25;marginTop:5px;fontWeight:500;whiteSpace:nowrap">Loans · Banking · Insurance</span>
+      </span>
+    </a>
+
+    <nav aria-label="Primary" style="marginLeft:auto;alignSelf:stretch;display:flex;alignItems:stretch;gap:clamp(1px,.3vw,4px);minWidth:0" data-nav-desktop>
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="8">
+        <span onMouseEnter="{{ l.enter }}" onMouseLeave="{{ l.leave }}" onFocus="{{ l.enter }}" onBlur="{{ l.blur }}" style="position:relative;display:flex;alignItems:stretch">
+        <a href="{{ l.href }}" aria-label="{{ l.flat }}" aria-current="{{ l.current }}" aria-haspopup="true" aria-expanded="{{ l.expanded }}" onMouseMove="{{ navMove }}" onMouseLeave="{{ navLeave }}" onClick="{{ ripple }}" style="{{ l.style }}" style-hover="color:#0A2347">
+          <span aria-hidden="true" style="pointerEvents:none;position:absolute;inset:6px 0;borderRadius:10px;background:radial-gradient(70px circle at var(--mx,50%) var(--my,50%), rgba(143,179,217,.32), rgba(211,34,42,.10) 55%, transparent 75%);opacity:var(--glow,0);transition:opacity .35s ease"></span>
+          <span style="position:relative;transform:translate(var(--tx,0px),var(--ty,0px));transition:transform .45s cubic-bezier(.22,.61,.36,1)">{{ l.label }}</span>
+          <span aria-hidden="true" style="{{ l.line }}"></span>
+        </a>
+        </span>
+      </sc-for>
+    </nav>
+
+    <a href="emi-calculator.html" data-cta-desktop aria-current="{{ loginCurrent }}" onMouseMove="{{ glowMove }}" onMouseLeave="{{ glowLeave }}" onClick="{{ ripple }}" style="position:relative;isolation:isolate;overflow:hidden;flexShrink:0;marginLeft:6px;display:flex;alignItems:center;gap:7px;minHeight:38px;padding:0 13px;borderRadius:999px;color:#0A2347;textDecoration:none;fontSize:9.5px;letterSpacing:.13em;textTransform:uppercase;fontWeight:600;transition:transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease" style-hover="transform:translateY(-1px);box-shadow:0 10px 24px -12px rgba(211,34,42,.7)" style-active="transform:translateY(0) scale(.98)">
+      <span aria-hidden="true" style="position:absolute;left:50%;top:50%;width:260%;aspectRatio:1 / 1;zIndex:-2;marginLeft:-130%;marginTop:-130%;background:conic-gradient(from 0deg, #D3222A, #FFFFFF, #8FB3D9, #D3222A);animation:pmaHdrSpin 3.6s linear infinite"></span>
+      <span aria-hidden="true" style="position:absolute;inset:1.5px;zIndex:-1;borderRadius:inherit;background:linear-gradient(180deg, #FFFDF8 0%, #F4EEE2 100%)"></span>
+      <span aria-hidden="true" style="pointerEvents:none;position:absolute;inset:0;borderRadius:inherit;background:radial-gradient(60px circle at var(--mx,50%) var(--my,50%), rgba(211,34,42,.30), transparent 70%);opacity:var(--glow,0);transition:opacity .3s ease"></span>
+      <svg width="13" height="14" viewBox="0 0 24 24" fill="none" stroke="#B01E25" stroke-width="1.9" stroke-linecap="round" aria-hidden="true" style="position:relative;flexShrink:0"><rect x="4" y="2.5" width="16" height="19" rx="2.5" /><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01" /></svg>
+      <span style="position:relative">EMI Calculator</span>
+    </a>
+
+    <a href="contact.html" data-cta-desktop onMouseMove="{{ glowMove }}" onMouseLeave="{{ glowLeave }}" onMouseEnter="{{ sheen }}" onClick="{{ ripple }}" style="position:relative;overflow:hidden;isolation:isolate;flexShrink:0;marginLeft:6px;display:flex;alignItems:center;gap:8px;minHeight:38px;padding:0 14px;borderRadius:999px;background:linear-gradient(180deg, #17407A 0%, #0A2347 100%);color:#F6F4EF;textDecoration:none;fontSize:9.5px;letterSpacing:.13em;textTransform:uppercase;fontWeight:500;boxShadow:inset 0 1px 0 rgba(255,255,255,.14), 0 8px 18px -10px rgba(10,35,71,.7);transition:transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease" style-hover="transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 3px rgba(143,179,217,.22), 0 14px 26px -12px rgba(10,35,71,.85)" style-active="transform:translateY(0) scale(.98)">
+      <span aria-hidden="true" style="pointerEvents:none;position:absolute;inset:0;borderRadius:inherit;background:radial-gradient(70px circle at var(--mx,50%) var(--my,50%), rgba(143,179,217,.45), transparent 70%);opacity:var(--glow,0);transition:opacity .3s ease"></span>
+      <span aria-hidden="true" style="pointerEvents:none;position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(105deg, transparent, rgba(255,255,255,.35), transparent);transform:translateX(var(--sx,-160%)) skewX(-18deg);transition:transform .8s cubic-bezier(.22,.61,.36,1)"></span>
+      <span aria-hidden="true" style="position:relative;width:6px;height:6px;borderRadius:50%;background:#9DC0EE;flexShrink:0;animation:pmaPulse 2.6s ease-in-out infinite"></span>
+      <span style="position:relative">Contact Us</span>
+      <span aria-hidden="true" style="position:relative;fontSize:13px;lineHeight:1;transform:translateX(var(--ax,0px));opacity:var(--ao,.6);transition:transform .4s cubic-bezier(.22,.61,.36,1), opacity .3s ease">→</span>
+    </a>
+
+    <button type="button" onClick="{{ toggle }}" aria-label="Menu" aria-expanded="{{ openStr }}" data-burger style="display:none;marginLeft:auto;width:44px;height:44px;border:1px solid rgba(10,35,71,.18);background:transparent;cursor:pointer;alignItems:center;justifyContent:center;flexDirection:column;gap:5px;padding:0">
+      <span style="{{ bar1 }}"></span>
+      <span style="{{ bar2 }}"></span>
+    </button>
+  </div>
+
+  <div onMouseEnter="{{ pk.enter }}" onMouseLeave="{{ pk.leave }}" onMouseMove="{{ pk.move }}" role="menu" aria-label="{{ pk.label }}" aria-hidden="{{ pk.hidden }}" style="{{ pk.style }}">
+    <span aria-hidden="true" style="pointerEvents:none;position:absolute;inset:0;background:radial-gradient(520px circle at var(--px,30%) var(--py,0%), rgba(157,192,238,.14), transparent 62%)"></span>
+    <span aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg, transparent, rgba(157,192,238,.75), transparent)"></span>
+    <span aria-hidden="true" style="{{ pk.ghostStyle }}">{{ pk.ghost }}</span>
+    <div style="position:relative;maxWidth:1400px;margin:0 auto;padding:clamp(26px,3vw,40px) clamp(20px,4vw,56px) clamp(28px,3.2vw,44px);display:grid;gridTemplateColumns:minmax(220px,1fr) minmax(0,2.2fr);gap:clamp(24px,4vw,72px);alignItems:start">
+      <div style="{{ pk.leftStyle }}">
+        <span style="fontSize:9.5px;letterSpacing:.3em;textTransform:uppercase;color:#9DC0EE">Explore</span>
+        <span style="fontFamily:Spectral, Georgia, serif;fontWeight:300;fontSize:clamp(30px,3vw,44px);lineHeight:1.05;letterSpacing:-.015em;color:#F6F4EF">{{ pk.title }}</span>
+        <span style="fontSize:13px;lineHeight:1.7;color:rgba(246,244,239,.72);maxWidth:32ch">{{ pk.desc }}</span>
+        <a href="{{ pk.href }}" onClick="{{ pk.close }}" style="alignSelf:flex-start;marginTop:8px;display:inline-flex;alignItems:center;gap:10px;paddingBottom:6px;borderBottom:1px solid rgba(157,192,238,.6);color:#F6F4EF;textDecoration:none;fontSize:10.5px;letterSpacing:.22em;textTransform:uppercase;transition:color .25s ease, gap .3s ease" style-hover="color:#BFD6F5;gap:16px">Open page <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="minWidth:0">
+        <div style="display:flex;alignItems:baseline;justifyContent:space-between;gap:14px;paddingBottom:12px;marginBottom:6px;borderBottom:1px solid rgba(246,244,239,.18)">
+          <span style="fontFamily:Spectral, Georgia, serif;fontWeight:400;fontSize:clamp(19px,1.7vw,23px);color:#F6F4EF">On this page</span>
+          <span style="fontSize:10px;letterSpacing:.2em;textTransform:uppercase;color:rgba(246,244,239,.5)">{{ pk.count }}</span>
+        </div>
+        <div style="display:grid;gridTemplateColumns:repeat(2,minmax(0,1fr));columnGap:clamp(24px,3vw,48px)">
+          <sc-for list="{{ pk.tags }}" as="t" hint-placeholder-count="4">
+            <a role="menuitem" href="{{ t.href }}" onClick="{{ pk.close }}" style="{{ t.style }}" style-hover="color:#FFFFFF;padding-left:10px;border-bottom-color:rgba(157,192,238,.55)">
+              <span style="flexShrink:0;minWidth:24px;fontFamily:Spectral, Georgia, serif;fontSize:12px;color:#9DC0EE">{{ t.no }}</span>
+              <span style="minWidth:0;flex:1">{{ t.label }}</span>
+              <span aria-hidden="true" style="flexShrink:0;fontSize:14px;color:rgba(157,192,238,.7)">→</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="{{ drawerStyle }}">
+    <nav aria-label="Mobile" style="padding:8px clamp(20px,6vw,40px) 34px;display:flex;flexDirection:column">
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="8">
+        <a href="{{ l.href }}" style="display:flex;alignItems:center;minHeight:56px;padding:0 14px;marginLeft:-14px;marginRight:-14px;borderBottom:1px solid rgba(10,35,71,.08);textDecoration:none;color:#0A2347;fontFamily:Spectral, Georgia, serif;fontSize:20px;letterSpacing:.01em;transition:background .3s ease, color .3s ease" style-hover="background:rgba(10,35,71,.05);color:#D3222A" style-active="background:rgba(10,35,71,.1)">{{ l.flat }}</a>
+      </sc-for>
+      <a href="emi-calculator.html" style="marginTop:22px;display:flex;alignItems:center;justifyContent:center;gap:10px;minHeight:52px;padding:16px;border:1px solid #D3222A;color:#0A2347;textDecoration:none;fontSize:11px;letterSpacing:.18em;textTransform:uppercase;transition:background .35s ease" style-hover="background:rgba(211,34,42,.14)" style-active="background:rgba(211,34,42,.24)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B01E25" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5" /><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01" /></svg>EMI Calculator</a>
+      <a href="contact.html" data-pill style="position:relative;overflow:hidden;isolation:isolate;display:inline-flex;alignItems:center;justifyContent:center;gap:10px;minHeight:50px;padding:0 26px;borderRadius:999px;background:linear-gradient(180deg, #17407A 0%, #0A2347 100%);color:#F6F4EF;textDecoration:none;fontSize:10.5px;letterSpacing:.18em;textTransform:uppercase;fontWeight:500;whiteSpace:nowrap;boxShadow:inset 0 1px 0 rgba(255,255,255,.14), 0 0 0 1px rgba(255,255,255,.16), 0 10px 22px -12px rgba(10,35,71,.75);transition:transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease;display:flex;marginTop:12px;minHeight:52px" style-hover="transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 3px rgba(143,179,217,.26), 0 16px 28px -12px rgba(10,35,71,.85)" style-active="transform:translateY(0) scale(.98)"><span aria-hidden="true" style="pointerEvents:none;position:absolute;inset:0;borderRadius:inherit;background:radial-gradient(80px circle at var(--mx,50%) var(--my,50%), rgba(143,179,217,.45), transparent 70%);opacity:var(--glow,0);transition:opacity .3s ease"></span><span aria-hidden="true" style="pointerEvents:none;position:absolute;top:0;bottom:0;left:0;width:40%;background:linear-gradient(105deg, transparent, rgba(255,255,255,.35), transparent);transform:translateX(var(--sx,-160%)) skewX(-18deg);transition:transform .8s cubic-bezier(.22,.61,.36,1)"></span><span aria-hidden="true" style="position:relative;width:6px;height:6px;borderRadius:50%;background:#9DC0EE;flexShrink:0;animation:pmaPulse 2.6s ease-in-out infinite"></span><span style="position:relative;display:inline-flex;alignItems:center;gap:8px">Free Consultation</span><span aria-hidden="true" style="position:relative;fontSize:13px;lineHeight:1;transform:translateX(var(--ax,0px));opacity:var(--ao,.6);transition:transform .4s cubic-bezier(.22,.61,.36,1), opacity .3s ease">→</span></a>
+    </nav>
+  </div>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const PEEK = {
+  'Home': [['Get in Touch', 'connect'], ['Loan Solutions', 'loans-h'], ['Why ADFS', 'why-h'], ['How It Works', 'how-h'], ['EMI Snapshot', 'emi-h'], ['Where to Go Next', 'next']],
+  'About': [['Our Story', 'story-h'], ['Founder', 'founder-h'], ['Our Speciality', 'spec-h'], ['Our Promise', 'promise-h']],
+  'Loans': [['Personal & Salaried', 'personal'], ['Business & MSME', 'business'], ['Home & Property', 'property'], ['Vehicle, Asset & Specialised', 'asset'], ['Banking & Protection', 'banking']],
+  'Process & Documents': [['Six-Step Process', 'steps-h'], ['Document Checklists', 'docs-h'], ['Before You Apply', 'tips-h']],
+  'Partners': [['Partner Banks & NBFCs', 'banks-h'], ['Why Multiple Lenders', 'multi-h']],
+  'Careers': [['Why Join Us', 'join-h'], ['Roles We Hire For', 'roles-h'], ['Apply Now', 'apply-h']]
+};
+const PEEK_DESC = {
+  'Home': 'The firm at a glance, the loans we arrange and the quickest ways to reach us.',
+  'About': 'Who we are, the advisor behind the firm and the principles behind every file.',
+  'Loans': 'Twelve loan products and three banking services, matched to the right lender.',
+  'Process & Documents': 'Six clear steps from first call to disbursal, and the document checklist for each loan.',
+  'Partners': 'The banks and NBFCs we work with, and why access to many lenders matters.',
+  'Careers': 'Roles in retail lending and advisory, and an online application.'
+};
+class Component extends DCLogic {
+  state = { open: false, peek: -1 };
+  peekOpen(i) { clearTimeout(this._pt); if (this.state.peek !== i) this.setState({ peek: i }); }
+  peekClose(now) { clearTimeout(this._pt); if (now) { this.setState({ peek: -1 }); return; } this._pt = setTimeout(() => this.setState({ peek: -1 }), 180); }
+
+  componentDidMount() {
+    const mq = window.matchMedia('(max-width: 1120px)');
+    const apply = () => {
+      const nav = document.querySelector('[data-nav-desktop]');
+      const ctas = document.querySelectorAll('[data-cta-desktop]');
+      const burger = document.querySelector('[data-burger]');
+      const show = full => {
+        if (nav) nav.style.display = full ? 'flex' : 'none';
+        ctas.forEach(c => { c.style.display = full ? 'flex' : 'none'; });
+        if (burger) burger.style.display = full ? 'none' : 'flex';
+      };
+      // Use the full menu only where it actually fits, so no title runs under the EMI Calculator pill
+      const nm = document.querySelector('[data-brand-name]');
+      if (nm) nm.style.display = window.innerWidth < 1240 && window.innerWidth > 1120 ? 'none' : 'flex';
+      if (nm && window.innerWidth < 420) nm.style.display = 'none';
+      let compact = mq.matches;
+      if (!compact && nav) { show(true); compact = nav.scrollWidth > nav.clientWidth + 1; }
+      show(!compact);
+      if (!compact && this.state.open) this.setState({ open: false });
+    };
+    apply();
+    this._apply = apply;
+    mq.addEventListener('change', apply);
+    window.addEventListener('resize', apply);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
+  }
+
+  componentDidUpdate() { if (this._apply) this._apply(); }
+
+  renderVals() {
+    const active = this.props.active || '';
+    const defs = [
+      ['Home', 'index.html'],
+      ['About', 'about.html'],
+      ['Loans', 'loans.html'],
+      ['Process &\nDocuments', 'process.html'],
+      ['Partners', 'partners.html'],
+      ['Careers', 'careers.html'],
+    ];
+    const links = defs.map(([label, href], i) => {
+      const flat = label.replace(/\n/g, ' ');
+      const on = flat.toLowerCase() === active.toLowerCase();
+      const sec = PEEK[flat] || [], open = this.state.peek === i, wide = sec.length > 5;
+      return {
+        label, flat, href,
+        expanded: open ? 'true' : 'false', menuLabel: flat + ' sections',
+        enter: () => this.peekOpen(i), leave: () => this.peekClose(false), close: () => this.peekClose(true),
+        blur: ev => { if (!ev.currentTarget.contains(ev.relatedTarget)) this.peekClose(true); },
+        tags: sec.map(([t, id], k) => ({ label: t, href: href + '#' + id,
+          style: 'display:block;justifySelf:' + (i >= defs.length - 2 ? 'end' : 'start') + ';padding:3px 2px;textDecoration:none;whiteSpace:nowrap;background:transparent;color:#0A2347;fontSize:12.5px;fontWeight:600;letterSpacing:.02em;lineHeight:1.35;textShadow:0 0 2px #F6F4EF, 0 0 4px #F6F4EF, 0 0 6px #F6F4EF, 0 0 9px #F6F4EF, 0 0 14px #F6F4EF, 0 0 20px rgba(246,244,239,.95), 0 0 28px rgba(246,244,239,.85);transition:color .25s ease, text-shadow .25s ease, transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease, opacity .3s ease;transitionDelay:' + (open ? (0.03 * k).toFixed(3) : '0') + 's;opacity:' + (open ? '1' : '0') + ';transform:translateY(' + (open ? '0' : '-6px') + ')' })),
+        peekStyle: 'position:absolute;top:calc(100% - 8px);' + (i >= defs.length - 2 ? 'right:0' : 'left:0') + ';zIndex:95;padding:8px 0 0;display:grid;gap:9px;gridTemplateColumns:' + (wide ? 'repeat(2,auto)' : 'auto') + ';columnGap:6px;justifyItems:' + (i >= defs.length - 2 ? 'end' : 'start') + ';transition:opacity .22s ease, transform .3s cubic-bezier(.22,.61,.36,1), visibility .22s;' +
+          (open ? 'opacity:1;visibility:visible;pointerEvents:auto;transform:none' : 'opacity:0;visibility:hidden;pointerEvents:none;transform:translateY(4px)') + (sec.length ? '' : ';display:none'),
+        current: on ? 'page' : null,
+        style: 'position:relative;overflow:hidden;display:flex;alignItems:center;alignSelf:stretch;minHeight:42px;padding:0 clamp(7px,calc(1.6vw - 13px),10px);textDecoration:none;whiteSpace:pre;textAlign:center;lineHeight:1.2;fontSize:10.5px;letterSpacing:clamp(.12em,calc(.13125vw - .42px),.14em);textTransform:uppercase;fontWeight:500;transition:color .3s ease;color:' + (on ? '#0A2347' : 'rgba(10,35,71,.62)'),
+        line: 'pointerEvents:none;position:absolute;left:clamp(7px,calc(1.6vw - 13px),10px);right:clamp(7px,calc(1.6vw - 13px),10px);bottom:14px;height:1.5px;borderRadius:2px;background:linear-gradient(90deg, #D3222A, #8FB3D9);transformOrigin:var(--lo,left);transform:scaleX(' + (on ? '1' : 'var(--ul,0)') + ');transition:transform .5s cubic-bezier(.22,.61,.36,1)'
+      };
+    });
+    const bar = 'display:block;width:20px;height:1px;background:#0A2347;transition:transform .35s ease, opacity .3s ease;';
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pos = ev => { const el = ev.currentTarget, r = el.getBoundingClientRect(); return { el, r, x: ev.clientX - r.left, y: ev.clientY - r.top }; };
+    const navMove = ev => {
+      const { el, r, x, y } = pos(ev);
+      el.style.setProperty('--mx', x + 'px'); el.style.setProperty('--my', y + 'px');
+      el.style.setProperty('--glow', '1'); el.style.setProperty('--ul', '1');
+      if (!el.__in) { el.__in = true; el.style.setProperty('--lo', x < r.width / 2 ? 'left' : 'right'); }
+      if (!reduce) { el.style.setProperty('--tx', ((x - r.width / 2) * 0.12).toFixed(1) + 'px'); el.style.setProperty('--ty', ((y - r.height / 2) * 0.12).toFixed(1) + 'px'); }
+    };
+    const navLeave = ev => {
+      const el = ev.currentTarget, r = el.getBoundingClientRect();
+      el.__in = false;
+      el.style.setProperty('--lo', ev.clientX - r.left < r.width / 2 ? 'left' : 'right');
+      ['--glow', '--ul', '--tx', '--ty'].forEach(p => el.style.removeProperty(p));
+    };
+    const glowMove = ev => {
+      const { el, x, y } = pos(ev);
+      el.style.setProperty('--mx', x + 'px'); el.style.setProperty('--my', y + 'px');
+      el.style.setProperty('--glow', '1'); el.style.setProperty('--ax', '4px'); el.style.setProperty('--ao', '1');
+      el.style.setProperty('--sh', '-3px'); el.style.setProperty('--shr', '-22deg');
+    };
+    const glowLeave = ev => { ['--glow', '--ax', '--ao', '--sh', '--shr', '--sx'].forEach(p => ev.currentTarget.style.removeProperty(p)); };
+    const sheen = ev => { if (!reduce) ev.currentTarget.style.setProperty('--sx', '360%'); };
+    const ripple = ev => {
+      if (reduce) return;
+      const { el, r, x, y } = pos(ev);
+      const d = document.createElement('span');
+      const size = Math.max(r.width, r.height) * 2.4;
+      d.setAttribute('aria-hidden', 'true');
+      d.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:' + size + 'px;border-radius:50%;pointer-events:none;background:radial-gradient(circle, rgba(143,179,217,.55), rgba(211,34,42,.18) 50%, transparent 70%);animation:pmaHdrRipple .7s cubic-bezier(.22,.61,.36,1) forwards';
+      el.appendChild(d);
+      setTimeout(() => d.remove(), 720);
+    };
+    return {
+      pk: (() => {
+        const pi = this.state.peek >= 0 ? this.state.peek : (this._lastPeek == null ? 0 : this._lastPeek);
+        if (this.state.peek >= 0) this._lastPeek = this.state.peek;
+        const open = this.state.peek >= 0, d = defs[pi] || defs[0], flat = d[0].replace(/\n/g, ' '), sec = PEEK[flat] || [];
+        return {
+          title: flat, desc: PEEK_DESC[flat] || '', href: d[1], label: flat + ' sections', hidden: open ? 'false' : 'true',
+          count: sec.length + (sec.length === 1 ? ' section' : ' sections'), ghost: String(sec.length).padStart(2, '0'),
+          ghostStyle: 'pointerEvents:none;position:absolute;right:clamp(20px,4vw,56px);bottom:-0.18em;fontFamily:Spectral, Georgia, serif;fontWeight:300;fontSize:clamp(120px,14vw,220px);lineHeight:1;color:transparent;WebkitTextStroke:1px rgba(157,192,238,.16);transition:opacity .5s ease, transform .6s cubic-bezier(.22,.61,.36,1);opacity:' + (open ? '1' : '0') + ';transform:translateY(' + (open ? '0' : '20px') + ')',
+          leftStyle: 'display:flex;flexDirection:column;gap:10px;transition:opacity .45s ease, transform .55s cubic-bezier(.22,.61,.36,1);opacity:' + (open ? '1' : '0') + ';transform:translateX(' + (open ? '0' : '-14px') + ')',
+          tags: sec.map(([t, id], k) => ({ label: t, no: String(k + 1).padStart(2, '0'), href: d[1] + '#' + id,
+            style: 'display:flex;alignItems:center;gap:12px;padding:12px 2px;borderBottom:1px solid rgba(246,244,239,.09);textDecoration:none;color:rgba(246,244,239,.86);fontSize:clamp(15px,1.25vw,17px);fontWeight:300;letterSpacing:.01em;transition:color .25s ease, padding .35s cubic-bezier(.22,.61,.36,1), border-color .3s ease, opacity .4s ease, transform .5s cubic-bezier(.22,.61,.36,1);transitionDelay:' + (open ? (0.06 + 0.035 * k).toFixed(3) : '0') + 's;opacity:' + (open ? '1' : '0') + ';transform:translateY(' + (open ? '0' : '8px') + ')' })),
+          style: 'position:absolute;left:0;right:0;top:100%;zIndex:95;overflow:hidden;background:linear-gradient(180deg, rgba(10,35,71,.97) 0%, rgba(5,21,48,.95) 100%);backdropFilter:blur(20px) saturate(1.35);WebkitBackdropFilter:blur(20px) saturate(1.35);boxShadow:0 40px 70px -34px rgba(0,0,0,.7);transition:clip-path .5s cubic-bezier(.22,.61,.36,1), opacity .3s ease, visibility .5s;' +
+            (open ? 'opacity:1;visibility:visible;pointerEvents:auto;clipPath:inset(0 0 0 0)' : 'opacity:0;visibility:hidden;pointerEvents:none;clipPath:inset(0 0 100% 0)'),
+          enter: () => clearTimeout(this._pt), leave: () => this.peekClose(false), close: () => this.peekClose(true),
+          move: ev => { const r = ev.currentTarget.getBoundingClientRect(); ev.currentTarget.style.setProperty('--px', (ev.clientX - r.left) + 'px'); ev.currentTarget.style.setProperty('--py', (ev.clientY - r.top) + 'px'); }
+        };
+      })(),
+      links, navMove, navLeave, glowMove, glowLeave, sheen, ripple,
+      loginCurrent: active.toLowerCase() === 'emi calculator' ? 'page' : null,
+      toggle: () => this.setState(s => ({ open: !s.open })),
+      openStr: this.state.open ? 'true' : 'false',
+      bar1: bar + (this.state.open ? 'transform:translateY(3px) rotate(45deg)' : ''),
+      bar2: bar + (this.state.open ? 'transform:translateY(-3px) rotate(-45deg)' : ''),
+      drawerStyle: 'borderTop:1px solid rgba(10,35,71,.08);background:#F6F4EF;transition:max-height .5s cubic-bezier(.22,.61,.36,1), opacity .4s ease;' +
+        (this.state.open
+          ? 'maxHeight:calc(100vh - clamp(68px,7vw,86px));overflowY:auto;overflowX:hidden;WebkitOverflowScrolling:touch;opacity:1'
+          : 'maxHeight:0px;overflow:hidden;opacity:0')
+    };
+  }
+}
+</script>
+</body>
+</html>

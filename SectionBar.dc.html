@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="theme.css">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<nav aria-label="On this page" style="background:rgba(10,35,71,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);borderBottom:1px solid rgba(246,244,239,.12)">
+  <div style="maxWidth:1400px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:flex;alignItems:center;gap:clamp(14px,2.2vw,32px);height:clamp(40px,3.6vw,44px)">
+    <span style="fontFamily:Spectral, Georgia, serif;fontSize:clamp(12px,1.2vw,14px);color:#F6F4EF;whiteSpace:nowrap;flexShrink:0;paddingRight:clamp(14px,2vw,26px);borderRight:1px solid rgba(246,244,239,.22);lineHeight:1.2">{{ label }}</span>
+    <div style="display:flex;alignItems:center;gap:clamp(2px,.5vw,8px);overflowX:auto;overflowY:hidden;flex:1;minWidth:0;scrollbarWidth:none;height:100%">
+      <sc-for list="{{ items }}" as="i" hint-placeholder-count="4">
+        <a href="{{ i.href }}" style="display:flex;alignItems:center;alignSelf:stretch;minHeight:38px;padding:0 clamp(9px,1vw,14px);color:rgba(246,244,239,.68);textDecoration:none;fontSize:10.5px;letterSpacing:.18em;textTransform:uppercase;whiteSpace:nowrap;transition:color .3s ease, background .3s ease, box-shadow .3s ease" style-hover="color:#F6F4EF;background:rgba(246,244,239,.10);box-shadow:inset 0 -1px 0 #D3222A" style-active="background:rgba(246,244,239,.18)">{{ i.label }}</a>
+      </sc-for>
+    </div>
+    <a href="contact.html#form-h" style="flexShrink:0;display:flex;alignItems:center;alignSelf:stretch;minHeight:38px;padding:0 clamp(10px,1.1vw,16px);color:#9DC0EE;textDecoration:none;fontSize:10.5px;letterSpacing:.18em;textTransform:uppercase;whiteSpace:nowrap;transition:color .3s ease, background .3s ease" style-hover="color:#0A2347;background:#9DC0EE" style-active="background:#7FA8DE">Enquire →</a>
+  </div>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Page&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;items&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Section|#section&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const raw = this.props.items || '';
+    const items = raw.split(';').filter(Boolean).map(pair => {
+      const parts = pair.split('|');
+      return { label: (parts[0] || '').trim(), href: (parts[1] || '#').trim() };
+    });
+    return { label: this.props.label || '', items };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="icons.css">
+<script src="data.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer style="position: relative; overflow: hidden; background: #0A2347; color: #F6F4EF; font-family: var(--sans);">
+  <!-- fraud awareness strip -->
+  <div style="border-bottom: 1px solid rgba(246,244,239,.1); background: rgba(157,192,238,.06);">
+    <div class="wrap" style="padding-top: 14px; padding-bottom: 14px; display: flex; gap: 12px; align-items: center;">
+      <span class="i i-lock" style="color: #9DC0EE; width: 17px; height: 17px;"></span>
+      <p style="margin: 0; font-size: 12.5px; line-height: 1.6; color: rgba(246,244,239,.8);"><strong style="color: #FFFFFF; font-weight: 600;">Stay safe:</strong> we never ask for OTPs, card PINs, passwords, or any payment into a personal account to "approve" a loan. Loans are sanctioned only by the bank or NBFC.</p>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top: clamp(40px, 4.6vw, 64px);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: clamp(28px, 3.4vw, 56px); align-items: start;">
+      <div style="min-width: 0;">
+        <a href="index.html" aria-label="AD Financial Services — home" style="display: inline-block;"><img src="assets/logo.jpg" alt="ADFS — AD Financial Services" width="1250" height="481" loading="lazy" style="width: 200px; height: auto; display: block;"></a>
+        <p style="margin: 18px 0 0; font-size: 13.5px; line-height: 1.75; color: rgba(246,244,239,.7); max-width: 34ch;">Loan advisory firm in Mangalwedha arranging home, business, MSME, personal and property loans with leading banks and NBFCs across Maharashtra.</p>
+      </div>
+
+      <div style="min-width: 0;">
+        <p style="margin: 0 0 16px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; font-weight: 500; color: #9DC0EE;">Quick Links</p>
+        <nav aria-label="Footer" style="display: flex; flex-direction: column; gap: 10px;">
+          <sc-for list="{{ quick }}" as="q" hint-placeholder-count="9">
+            <a href="{{ q.href }}" style="color: rgba(246,244,239,.78); text-decoration: none; font-size: 14px;" style-hover="color: #FFFFFF;">{{ q.label }}</a>
+          </sc-for>
+        </nav>
+      </div>
+
+      <div style="min-width: 0;">
+        <p style="margin: 0 0 16px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; font-weight: 500; color: #9DC0EE;">Loans</p>
+        <nav aria-label="Loans" style="display: flex; flex-direction: column; gap: 10px;">
+          <sc-for list="{{ loans }}" as="l" hint-placeholder-count="8">
+            <a href="{{ l.href }}" style="color: rgba(246,244,239,.78); text-decoration: none; font-size: 14px;" style-hover="color: #FFFFFF;">{{ l.title }}</a>
+          </sc-for>
+        </nav>
+      </div>
+
+      <div style="min-width: 0;">
+        <p style="margin: 0 0 16px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; font-weight: 500; color: #9DC0EE;">Contact</p>
+        <a href="{{ tel }}" style="display: block; font-size: 15px; font-weight: 500; color: #FFFFFF; text-decoration: none;" style-hover="color: #9DC0EE;">{{ phone }}</a>
+        <a href="{{ mailto }}" style="display: block; margin-top: 8px; font-size: 14px; color: rgba(246,244,239,.78); text-decoration: none; word-break: break-all;" style-hover="color: #FFFFFF;">{{ email }}</a>
+        <p style="margin: 14px 0 0; font-size: 13.5px; line-height: 1.7; color: rgba(246,244,239,.7);">{{ address }}</p>
+        <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;">
+          <a href="{{ wa }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(246,244,239,.3); color: #F6F4EF; text-decoration: none; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; transition: background-color .3s ease;" style-hover="background: rgba(246,244,239,.12); color: #fff;"><span class="i i-wa" style="width: 14px; height: 14px; color: #25D366;"></span>WhatsApp</a>
+          <a href="{{ map }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(246,244,239,.3); color: #F6F4EF; text-decoration: none; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; transition: background-color .3s ease;" style-hover="background: rgba(246,244,239,.12); color: #fff;">Directions</a>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin: clamp(30px, 3.4vw, 44px) 0 0; padding-top: 18px; border-top: 1px solid rgba(246,244,239,.1); font-size: 11.5px; line-height: 1.75; color: rgba(246,244,239,.55);"><strong style="color: rgba(246,244,239,.78); font-weight: 600;">Disclaimer:</strong> AD Financial Services is a loan advisory and facilitation firm, not a bank, NBFC or lender. Loans, cards and accounts are sanctioned solely by the respective bank or NBFC as per its policy. Rates, EMIs and figures on this website are indicative; the lender's sanction letter is final. Insurance is the subject matter of solicitation. Lender names are trademarks of their respective owners.</p>
+
+    <div style="margin-top: 16px; padding: 18px 0 24px; border-top: 1px solid rgba(246,244,239,.1); display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; justify-content: space-between; font-size: 11.5px; color: rgba(246,244,239,.55);">
+      <span>© 2026 AD Financial Services. All rights reserved.</span>
+      <span style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <a href="privacy-policy.html" style="color: rgba(246,244,239,.6); text-decoration: none;" style-hover="color: #fff;">Privacy Policy</a>
+        <a href="privacy-policy.html#disclaimer" style="color: rgba(246,244,239,.6); text-decoration: none;" style-hover="color: #fff;">Disclaimer &amp; Terms</a>
+        <a href="privacy-policy.html#grievance" style="color: rgba(246,244,239,.6); text-decoration: none;" style-hover="color: #fff;">Grievance &amp; Data Requests</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<div data-adfs-dock style="position: fixed; right: clamp(16px, 2.4vw, 32px); bottom: clamp(16px, 2.4vw, 32px); z-index: 88; display: flex; align-items: center; gap: 10px; opacity: 0; visibility: hidden; transform: translateY(26px); transition: opacity .45s ease, transform .55s cubic-bezier(.22,.61,.36,1), visibility .45s;">
+  <a href="{{ mailto }}" aria-label="Email AD Financial Services" style="width: 52px; height: 52px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(10,35,71,.55); backdrop-filter: blur(10px) saturate(140%); -webkit-backdrop-filter: blur(10px) saturate(140%); border: 1px solid rgba(255,255,255,.4); color: #fff; text-decoration: none; box-shadow: 0 8px 26px rgba(10,35,71,.24); transition: background-color .3s ease, transform .3s cubic-bezier(.2,.8,.3,1);" style-hover="background: rgba(10,35,71,.85); color: #fff; transform: translateY(-3px);"><span class="i i-mail" style="width: 19px; height: 19px;"></span></a>
+  <a href="{{ wa }}" target="_blank" rel="noopener" aria-label="Chat with AD Financial Services on WhatsApp" title="Chat on WhatsApp" style="width: 54px; height: 54px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #25D366; border: 2px solid rgba(255,255,255,.85); color: #fff; text-decoration: none; box-shadow: 0 10px 26px rgba(18,128,61,.38); transition: transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s ease;" style-hover="color: #fff; transform: translateY(-3px) scale(1.05); box-shadow: 0 14px 32px rgba(18,128,61,.5);">
+    <svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px; display: block;"><path fill="#FFFFFF" fill-rule="evenodd" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.11.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.25-4.37c0-4.53 3.7-8.22 8.23-8.22 2.2 0 4.26.86 5.81 2.41a8.17 8.17 0 0 1 2.41 5.82c0 4.53-3.7 8.21-8.23 8.21Zm4.52-6.15c-.25-.12-1.47-.72-1.69-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.8.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.12-.14.17-.25.25-.41.08-.17.04-.31-.03-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.6c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3Z"/></svg>
+  </a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const D = window.ADFS;
+    return {
+      quick: [['Home', 'index.html'], ['About', 'about.html'], ['Loans', 'loans.html'], ['Process & Documents', 'process.html'], ['EMI Calculator', 'emi-calculator.html'],
+        ['Partners', 'partners.html'], ['Careers', 'careers.html'], ['Contact', 'contact.html']].map(([label, href]) => ({ label, href })),
+      loans: D.loans.filter((l) => ['personal-loan', 'business-loan', 'msme-loan', 'home-loan', 'property-loan', 'vehicle-loan', 'doctor-loan', 'gold-loan'].includes(l.id))
+        .map((l) => ({ title: l.title, href: 'loans.html#' + l.id })),
+      phone: D.phone, tel: D.tel, email: D.email, mailto: 'mailto:' + D.email, wa: D.wa, address: D.address,
+      map: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(D.mapQuery)
+    };
+  }
+}
+</script>
+</body>
+</html>
