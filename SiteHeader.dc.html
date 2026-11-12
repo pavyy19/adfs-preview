@@ -125,6 +125,21 @@ class Component extends DCLogic {
   peekClose(now) { clearTimeout(this._pt); if (now) { this.setState({ peek: -1 }); return; } this._pt = setTimeout(() => this.setState({ peek: -1 }), 180); }
 
   componentDidMount() {
+    if (location.hash.length > 1 && !window.__adfsHashDone) {
+      window.__adfsHashDone = true;
+      let tries = 0;
+      const id = decodeURIComponent(location.hash.slice(1));
+      const go = () => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().height) {
+          el.scrollIntoView({ block: 'start', behavior: 'instant' });
+          setTimeout(() => el.scrollIntoView({ block: 'start', behavior: 'instant' }), 500);   // again after late layout
+          return;
+        }
+        if (++tries < 40) setTimeout(go, 150);
+      };
+      setTimeout(go, 250);
+    }
     const mq = window.matchMedia('(max-width: 1120px)');
     const apply = () => {
       const nav = document.querySelector('[data-nav-desktop]');
