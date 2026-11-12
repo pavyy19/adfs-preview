@@ -316,8 +316,8 @@ class Component extends DCLogic {
         '<div style="padding:22px 28px 26px"><p style="margin:0;font-size:14px;line-height:1.75;color:rgba(10,35,71,.78)">' + esc(l.body.split('. ')[0].replace(/\.$/, '')) + '.</p>' +
           '<ul>' + l.points.slice(0, 3).map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' +
           '<div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:10px">' +
-            '<a class="btn btn-ink" href="Loans.dc.html#' + esc(l.id) + '">Read in detail →</a>' +
-            '<a class="btn btn-line" href="Contact.dc.html?type=' + encodeURIComponent(l.title) + '#enquiry">Enquire</a>' +
+            '<a class="btn btn-ink" href="' + 'loans.html' + '#' + esc(l.id) + '">Read in detail →</a>' +
+            '<a class="btn btn-line" href="' + 'contact.html' + '?type=' + encodeURIComponent(l.title) + '#enquiry">Enquire</a>' +
             '<a class="btn btn-wa" target="_blank" rel="noopener" href="' + D.wa + '?text=' + encodeURIComponent('Hello, I would like to know more about a ' + l.title + '.') + '"><span class="i i-wa" style="width:15px;height:15px"></span>WhatsApp</a>' +
           '</div></div></div>';
       box.classList.add('on');
